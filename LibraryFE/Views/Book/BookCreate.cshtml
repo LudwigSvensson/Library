@@ -1,0 +1,49 @@
+﻿@model BookDTO
+
+@{
+    var genres = Enum.GetValues(typeof(Book.Genre))
+                     .Cast<Book.Genre>()
+                     .Select(g => new SelectListItem { Value = g.ToString(), Text = g.ToString() })
+                     .ToList();
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="widget p-5">
+            <form asp-action="BookCreate" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="BookId" type="hidden" />
+                <div class="mb-3">
+                    <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-textbox id="author" placeholder="Author" ejs-for="Author" floatLabelType="Always"></ejs-textbox>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <ejs-datepicker id="realeaseYear" format="yyyy-MM-dd" placeholder="Release Year" ejs-for="RealeseYear" floatLabelType="Always"></ejs-datepicker>
+                    <span asp-validation-for="RealeseYear" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <div class="control-wrapper">
+                        <div id="default">
+                            <ejs-dropdownlist id="Genres" dataSource="@genres"
+                                              placeholder="Select a genre" popupHeight="220px" ejs-for="BookGenre">
+                                <e-dropdownlist-fields text="Text" value="Value"></e-dropdownlist-fields>
+                            </ejs-dropdownlist>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ejs-button id="submit" typeof="submit" content="Submit" cssClass="e-success"></ejs-button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="widget h-100 d-flex justify-content-center align-items-center">
+            <i class="fa-solid fa-book fa-10x"></i>
+        </div>
+    </div>
+</div>
