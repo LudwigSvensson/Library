@@ -9,7 +9,7 @@ namespace LibraryFE.Services
 
         Task<T> GetBookById<T>(int id);
 
-        Task<T> CreateBookAsync<T>(BookDTO bookDto);
+        Task<T> CreateBookAsync<T>(BookCreateDTO bookDto);
 
         Task<T> UpdateBookAsync<T>(BookDTO bookDto);
 

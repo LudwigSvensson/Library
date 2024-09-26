@@ -23,7 +23,8 @@ namespace Library.Models.DTO_s
         public Book.Genre BookGenre { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy}")]
-        [DisplayName("Realease Year")]
+        [DisplayName("Release Year")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime RealeseYear { get; set; }
     }

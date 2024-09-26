@@ -8,7 +8,7 @@ namespace LibraryFE.Services
         {
             _httpClient = httpClient;
         }
-        public async Task<T> CreateBookAsync<T>(BookDTO bookDto)
+        public async Task<T> CreateBookAsync<T>(BookCreateDTO bookDto)
         {
             return await this.SendAsync<T>(new Models.ApiRequest
             {

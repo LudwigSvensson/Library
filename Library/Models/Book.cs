@@ -26,7 +26,7 @@ namespace Library.Models
             Romantik,
             Fantasy,
             Scifi,
-            Självbiografi
+            Självbiografi,
         }
     }
 }

@@ -32,16 +32,17 @@ namespace LibraryFE.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> BookCreate(BookDTO model)
+        public async Task<IActionResult> BookCreate(BookCreateDTO model)
         {
             if (ModelState.IsValid)
             {
                 var response = await _bookService.CreateBookAsync<ResponseDTO>(model);
                 if (response != null && response.IsSuccess)
                 {
-                    return RedirectToAction(nameof(BookIndex));
+                    return RedirectToAction(nameof(BookIndex));  
                 }
             }
             return View(model);
@@ -67,7 +68,7 @@ namespace LibraryFE.Controllers
             var response = await _bookService.DeleteBookAsync<ResponseDTO>(model.BookId);
             if (response != null && response.IsSuccess)
             {
-                return RedirectToAction(nameof(BookIndex));
+                return RedirectToAction(nameof(BookIndex));               
             }
             return RedirectToAction(nameof(BookIndex));
         }

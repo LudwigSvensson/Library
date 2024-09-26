@@ -42,9 +42,6 @@ namespace LibraryFE.Services
 
                 switch (apiRequest.Type)
                 {
-                    case StaticDetails.ApiType.GET:
-                        message.Method = HttpMethod.Get;
-                        break;
                     case StaticDetails.ApiType.POST:
                         message.Method = HttpMethod.Post;
                         break;
@@ -55,7 +52,8 @@ namespace LibraryFE.Services
                         message.Method = HttpMethod.Delete;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        message.Method = HttpMethod.Get;
+                        break;
                 }
 
                 HttpResponseMessage apiResponse = await client.SendAsync(message);
