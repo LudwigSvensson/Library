@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Book } from '../Models/Book';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -12,12 +13,13 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // Example method to get data
-  getData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/api/your-endpoint`);
+  getAllBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.baseUrl);
   }
 
   // Example method to post data
-  postData(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/api/your-endpoint`, data);
-  }
+
+    postBook(data: Book): Observable<Book> {
+      return this.http.post<Book>(`${this.baseUrl}/api/book`, data);
+    }
 }

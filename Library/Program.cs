@@ -18,16 +18,17 @@ namespace Library
             // Add services to the container.
             builder.Services.AddAuthorization();
 
+            //Cors
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAll",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin()
-                               .AllowAnyMethod()
-                               .AllowAnyHeader();
-                    });
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -47,6 +48,7 @@ namespace Library
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAllOrigins");
 
             app.UseHttpsRedirection();
 
