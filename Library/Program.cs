@@ -21,7 +21,7 @@ namespace Library
             //Cors
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowAllOrigins",
+                options.AddPolicy("Allow4200",
                     builder => builder
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
@@ -48,7 +48,7 @@ namespace Library
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors("AllowAllOrigins");
+            app.UseCors("Allow4200");
 
             app.UseHttpsRedirection();
 

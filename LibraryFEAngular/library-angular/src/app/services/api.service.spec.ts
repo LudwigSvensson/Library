@@ -1,25 +1,53 @@
-import { Injectable } from '@angular/core';
-import { Book } from '../Models/Book';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ApiService } from './api.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ApiService {
+describe('ApiService', () => {
+  let service: ApiService;
+  let httpMock: HttpTestingController;
 
-  private baseUrl = 'https://localhost:7268/api/book'; // API URL
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [ApiService]
+    });
+    service = TestBed.inject(ApiService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
 
-  constructor(private http: HttpClient) { }
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-  // Example method to get data
-  getAllBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl);
-  }
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-  // Example method to post data
+  it('should fetch books as an Observable', () => {
+    const dummyBooks: any[] = [
+      { id: 1, title: 'Book 1', author: 'Author 1' },
+      { id: 2, title: 'Book 2', author: 'Author 2' }
+    ];
 
-    postBook(data: Book): Observable<Book> {
-      return this.http.post<Book>(`${this.baseUrl}/api/book`, data);
-    }
-}
+    service.getBooks().subscribe(books => {
+      expect(books.length).toBe(2);
+      expect(books).toEqual(dummyBooks);
+    });
+
+    const req = httpMock.expectOne(`${service['baseUrl']}/api/book`);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyBooks);
+  });
+
+  it('should post a book and return it', () => {
+    const newBook: any = { id: 3, title: 'Book 3', author: 'Author 3' };
+
+    service.postBook(newBook).subscribe(book => {
+      expect(book).toEqual(newBook);
+    });
+
+    const req = httpMock.expectOne(`${service['baseUrl']}/api/book`);
+    expect(req.request.method).toBe('POST');
+    req.flush(newBook);
+  });
+});

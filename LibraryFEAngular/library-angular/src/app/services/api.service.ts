@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../Models/Book';
 import { HttpClient } from '@angular/common/http';
+
+interface Data {
+  // Define the properties of the Data interface here
+  // For example:
+  title: string;
+  author: string;
+}
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,13 +19,13 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // Example method to get data
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.baseUrl}/api/books`);
+  getBooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/books`);
   }
 
   // Example method to post data
 
-    postBook(data: Book): Observable<Book> {
-      return this.http.post<Book>(`${this.baseUrl}/api/book`, data);
-    }
+  postBook(data: Data): Observable<Data> {
+    return this.http.post<Data>(`${this.baseUrl}/api/book`, data);
+  }
 }
