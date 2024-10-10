@@ -1,3 +1,23 @@
-<div *ngFor="let book of books">
-  <p>{{ book.title}}</p>
+<div class="library-container">
+  <h2>Library</h2>
+  <button class="btn create-btn" type="button" routerLink="add-book" router>+ Lägg till bok</button>
+  <table class="book-table">
+    <thead class="theadnav">
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Release Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.bookGenre }}</td>
+        <td>{{ book.realeseYear | date:'yyyy' }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+<router-outlet></router-outlet>
