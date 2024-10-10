@@ -3,10 +3,11 @@ import { ApiService } from '../../services/api.service';
 import { Book, BookGenre } from '../../../models/book.models';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-add-book',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css'
 })

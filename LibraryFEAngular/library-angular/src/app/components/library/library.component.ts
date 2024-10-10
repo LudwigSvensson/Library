@@ -5,13 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Book} from '../../../models/book.models';
 import { Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { error } from 'console';
 import { AddBookComponent } from "../add-book/add-book.component";
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, AddBookComponent],
+  imports: [RouterOutlet, CommonModule, FormsModule, AddBookComponent, RouterLink, RouterLinkActive],
   providers: [ApiService],
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
