@@ -36,10 +36,12 @@ export class UpdateBookComponent implements OnInit {
     this.apiService.updateBook(this.book).subscribe({
       next: response => {
         console.log('Book updated:', response);
-        this.router.navigate(['/']);
+        this.router.navigate(['/']); 
+
       },
       error: error => {
         console.error('Error updating book', error);
+        console.error(error.error);
       }
     });
   }
