@@ -1,0 +1,64 @@
+/* add-book.component.css */
+
+/* Grundläggande reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container för add-book-komponenten */
+.update-book-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Rubriker */
+.update-book-container h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #0056b3;
+}
+
+/* Styling för formuläret */
+.book-form {
+    margin-bottom: 20px;
+}
+
+.book-form .form-group {
+    margin-bottom: 15px;
+}
+
+.book-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.book-form input, .book-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Knapp */
+.book-form .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-form .btn:hover {
+    background-color: #0056b3;
+}

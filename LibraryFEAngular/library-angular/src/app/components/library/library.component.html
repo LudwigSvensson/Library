@@ -16,6 +16,9 @@
         <td>{{ book.author }}</td>
         <td>{{ book.bookGenre }}</td>
         <td>{{ book.realeseYear | date:'yyyy' }}</td>
+        <td><button class="btn edit-btn" type="button" [routerLink]="['/update-book', book.bookId]" ><i class="fa-solid fa-pen"></i></button>
+          <button class="btn delete-btn" type="button" (click)="deleteBook(book.bookId)"><i class="fa-solid fa-trash-can"></i></button>
+        </td>
       </tr>
     </tbody>
   </table>

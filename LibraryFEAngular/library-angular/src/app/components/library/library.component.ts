@@ -6,11 +6,12 @@ import { Book} from '../../../models/book.models';
 import { Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddBookComponent } from "../add-book/add-book.component";
+import { UpdateBookComponent } from '../update-book/update-book.component';
 
 @Component({
   selector: 'app-library',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, AddBookComponent, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, CommonModule, FormsModule, AddBookComponent, UpdateBookComponent,RouterLink, RouterLinkActive],
   providers: [ApiService],
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.css']
@@ -30,5 +31,16 @@ export class LibraryComponent implements OnInit {
     }
   });
   }
+
+  deleteBook(bookId: string): void {
+    this.apiService.deleteBook(bookId).subscribe({
+      next: () => {
+        this.books = this.books.filter(book => book.bookId !== bookId);
+      },
+      error: error => {
+        console.error('Error deleting book', error);
+      }
+    });
+  } 
 }
 

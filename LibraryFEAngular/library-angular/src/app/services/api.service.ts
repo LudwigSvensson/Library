@@ -32,4 +32,10 @@ export class ApiService {
   deleteBook(bookId: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/api/book/${bookId}`);
   }
+
+  getBookById(bookId: string): Observable<Book> {
+
+    return this.http.get<Book>(`/api/books/${bookId}`);
+
+  }
 }
