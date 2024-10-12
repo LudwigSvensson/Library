@@ -19,11 +19,12 @@ export class UpdateBookComponent implements OnInit {
   genres = Object.values(BookGenre);
 
   ngOnInit(): void {
-    const bookId = this.route.snapshot.paramMap.get('id');
+    const bookId = this.route.snapshot.paramMap.get('bookId');
     if (bookId) {
       this.apiService.getBookById(bookId).subscribe({
         next: response => {
-          this.book = response;
+          this.book = response as Book;  // Se till att vi hämtar bokens data korrekt
+          console.log('Fetched book data:', this.book);  // Logga bokens data
         },
         error: error => {
           console.error('Error fetching book', error);
@@ -33,15 +34,25 @@ export class UpdateBookComponent implements OnInit {
   }
 
   updateBook(): void {
-    this.apiService.updateBook(this.book).subscribe({
+    // Få alltid bookId från route-parametern
+    const bookId = this.route.snapshot.paramMap.get('bookId');
+    if (bookId) {
+      this.book.bookId = String(bookId);  // Sätt bookId explicit på objektet
+    }
+  
+    // Kontrollera om bookId finns och att boken är redo för uppdatering
+    if (!this.book || !this.book.bookId) {
+      console.error('Book or bookId is missing');
+      return;
+    }
+  
+    this.apiService.updateBook(this.book.bookId, this.book).subscribe({
       next: response => {
-        console.log('Book updated:', response);
-        this.router.navigate(['/']); 
-
+        console.log('Book updated successfully', response);
+        this.router.navigate(['/']);
       },
-      error: error => {
-        console.error('Error updating book', error);
-        console.error(error.error);
+      error: err => {
+        console.error('Error updating book', err);
       }
     });
   }

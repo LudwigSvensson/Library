@@ -23,7 +23,7 @@ namespace Library.EndPoints
                 Produces(201).
                 Produces(400);
 
-            app.MapPut("/api/book", UpdateBook).
+            app.MapPut("/api/book/{id:int}", UpdateBook).
                 WithName("UpdateBook").
                 Accepts<BookUpdateDTO>("application/json").
                 Produces(200).
@@ -86,10 +86,10 @@ namespace Library.EndPoints
         private async static Task<IResult> UpdateBook(
            IBookRepository bookRepository,
            IMapper _mapper,
-           BookUpdateDTO book_U_DTO)
+           BookUpdateDTO book_U_DTO, int id)
         {
             ResponseModel response = new ResponseModel() { IsSuccess = false, StatusCode = System.Net.HttpStatusCode.BadRequest };
-            var existingBook = await bookRepository.GetByBookId(book_U_DTO.BookId);
+            var existingBook = await bookRepository.GetByBookId(id);
             if (existingBook == null)
             {
                 response.ErrorMessages.Add("Book not found");
@@ -100,7 +100,7 @@ namespace Library.EndPoints
             await bookRepository.UpdateAsync(existingBook);
             await bookRepository.SaveAsync();
 
-            response.Result = _mapper.Map<BookUpdateDTO>(await bookRepository.GetByBookId(book_U_DTO.BookId));
+            response.Result = _mapper.Map<BookUpdateDTO>(existingBook);
             response.IsSuccess = true;
             response.StatusCode = System.Net.HttpStatusCode.OK;
             return Results.Ok(response);

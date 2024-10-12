@@ -6,5 +6,5 @@ import{UpdateBookComponent} from './components/update-book/update-book.component
 export const routes: Routes = [
   { path: '', component: LibraryComponent },
   { path: 'add-book', component: AddBookComponent },
-  {path: 'update-book/:id', component: UpdateBookComponent}
+  {path: 'update-book/:bookId', component: UpdateBookComponent}
 ];
