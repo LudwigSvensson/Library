@@ -38,6 +38,12 @@ export class LibraryComponent implements OnInit {
   }
 
   deleteBook(bookId: string): void {
+    // Confirm delete action
+    const confirmDelete = window.confirm('Are you sure you want to delete this book?');
+    if (!confirmDelete) {
+      return; // Exit if the user cancels the delete
+    }
+
     this.apiService.deleteBook(bookId.toString()).subscribe({
       next: () => {
         this.books = this.books.filter(book => book.bookId !== bookId);
@@ -47,6 +53,8 @@ export class LibraryComponent implements OnInit {
       }
     });
   } 
+
+ 
   
 }
 

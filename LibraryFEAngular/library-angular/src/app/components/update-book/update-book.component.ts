@@ -34,6 +34,12 @@ export class UpdateBookComponent implements OnInit {
   }
 
   updateBook(): void {
+    // Confirm update action
+    const confirmUpdate = window.confirm('Are you sure you want to update this book?');
+    if (!confirmUpdate) {
+      return; // Exit if the user cancels the update
+    }
+
     // Få alltid bookId från route-parametern
     const bookId = this.route.snapshot.paramMap.get('bookId');
     if (bookId) {
@@ -55,5 +61,9 @@ export class UpdateBookComponent implements OnInit {
         console.error('Error updating book', err);
       }
     });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

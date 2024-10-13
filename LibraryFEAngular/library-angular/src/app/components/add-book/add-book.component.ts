@@ -31,4 +31,8 @@ export class AddBookComponent {
     });
     return this.newBook;
   }
+
+  goBack(): void {
+    this.router.navigate(['/']);
+  }
 }

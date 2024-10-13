@@ -1,5 +1,6 @@
+
 body {
-    background-color: #ffffff;
+    background: linear-gradient(to right, #007BFF, #87CEFA); /* Gradient från blått till ljusblått */
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -8,11 +9,13 @@ body {
   .library-container {
     margin: 50px auto;
     padding: 20px;
-    width: 90%;
-    max-width: 1200px;
-    background-color: #ffffff;
+    width: 80%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.185); /* Vit bakgrund med transparens */
+    backdrop-filter: blur(10px);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
   }
   
   h2 {
@@ -67,34 +70,80 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .btn.edit-btn {
+    background-color: #e4c933;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 5px;
   }
   
+  .btn.edit-btn:hover {
+    background-color: #868821;
+  }
+  
+  .btn.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn.delete-btn:hover {
+    background-color: #581219da;
+  }
   .btn.create-btn:hover {
     background-color: #0056b3;
   }
-  
-  .book-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .book-table th,
-  .book-table td {
-    padding: 10px;
-    text-align: left;
-  }
-  
   .theadnav th {
     background-color: #00b4d8;
     color: white;
   }
-  
+  .book-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+.book-table th,
+.book-table td {
+    padding: 12px 15px;
+    border: 1px solid antiquewhite;
+    text-align: left;    
+}
+.book-table th {
+  background-color: antiquewhite;
+  color: #333;
+  font-weight: bold;
+}
+.book-table td {
+  background-color: antiquewhite;
+  color: #333;
+  transition: background-color 0.3s ease;
+}  
+.book-table tbody tr:hover td {
+  background-color: #f1f1f1;
+}
   .book-table td {
-    background-color: #f8f9fa;
+    background-color: rgb(247, 243, 238);
     border: 1px solid #dee2e6;
   }
-  
-  .book-table tbody tr:nth-child(even) {
-    background-color: #e9ecef;
+  .book-table td:last-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 45%;
+    background: none;
+    border: none;
   }

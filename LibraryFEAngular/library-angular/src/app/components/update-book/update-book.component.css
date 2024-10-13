@@ -12,7 +12,8 @@
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.185); /* Vit bakgrund med transparens */
+    backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
@@ -58,7 +59,18 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px; /* Lägg till mellanrum ovanför knapparna */
+  }
 .book-form .btn:hover {
     background-color: #0056b3;
 }
+
+.error {
+    color: red;
+    text-shadow: 1px 1px 2px #080303; /* Lägg till skugga/kontur på texten */
+    font-size: 0.9em;
+  }
