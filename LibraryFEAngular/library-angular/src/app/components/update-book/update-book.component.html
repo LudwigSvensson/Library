@@ -1,8 +1,8 @@
 <div class="update-book-container">
-  <form (ngSubmit)="updateBook()" #bookForm="ngForm" class="book-form">
+  <form (ngSubmit)="updateBook(bookForm)" #bookForm="ngForm" class="book-form">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" id="title" name="title" [(ngModel)]="book.title" required minlength="3" #title="ngModel">
+      <input type="text" id="title" name="title" [(ngModel)]="book.title" required minlength="3" #title="ngModel" placeholder="{{book.title}}">
       <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
         <div *ngIf="title.errors?.['required']">Title is required.</div>
         <div *ngIf="title.errors?.['minlength']">Title must be at least 3 characters long.</div>
@@ -37,5 +37,4 @@
     <button (click)="goBack()" class="btn back-btn">Gå tillbaka</button>
   </div>
   </form>
-  
 </div>
