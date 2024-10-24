@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class UpdateBookComponent implements OnInit {
 
   constructor(private apiService: ApiService, private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef) { }
-  book: Book = { bookId: '', title: '', author: '', bookGenre: BookGenre.Biografi, realeseYear: new Date() };
+  bookToEdit: any = {};
   genres = Object.values(BookGenre);
   
 
@@ -24,9 +24,9 @@ export class UpdateBookComponent implements OnInit {
     if (bookId) {
       this.apiService.getBookById(bookId).subscribe({
         next: response => {
-          this.book = response as Book;  // Se till att vi hämtar bokens data korrekt
-          console.log('Fetched book data:', this.book);  // Logga bokens data
-          this.cdr.detectChanges();  // Tvinga en uppdatering av formuläret
+          this.bookToEdit = response;  
+          console.log('Fetched book data:', response);  
+          this.populateForm(response);
         },
         error: error => {
           console.error('Error fetching book', error);
@@ -43,26 +43,22 @@ export class UpdateBookComponent implements OnInit {
       });
       return;
     }
-
-    // Confirm update action
     const confirmUpdate = window.confirm('Are you sure you want to update this book?');
     if (!confirmUpdate) {
-      return; // Exit if the user cancels the update
+      return; 
     }
 
-    // Få alltid bookId från route-parametern
     const bookId = this.route.snapshot.paramMap.get('bookId');
     if (bookId) {
-      this.book.bookId = String(bookId);  // Sätt bookId explicit på objektet
+      this.bookToEdit.bookId = String(bookId);  
     }
   
-    // Kontrollera om bookId finns och att boken är redo för uppdatering
-    if (!this.book || !this.book.bookId) {
+    if (!this.bookToEdit || !this.bookToEdit.bookId) {
       console.error('Book or bookId is missing');
       return;
     }
   
-    this.apiService.updateBook(this.book.bookId, this.book).subscribe({
+    this.apiService.updateBook(this.bookToEdit.bookId, this.bookToEdit).subscribe({
       next: response => {
         console.log('Book updated successfully', response);
         this.router.navigate(['/']);
@@ -71,6 +67,11 @@ export class UpdateBookComponent implements OnInit {
         console.error('Error updating book', err);
       }
     });
+  }
+
+  populateForm(book: Book){
+    this.bookToEdit= book;
+    this.cdr.detectChanges();
   }
 
   goBack(): void {

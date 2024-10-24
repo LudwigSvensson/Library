@@ -2,7 +2,7 @@
   <form (ngSubmit)="updateBook(bookForm)" #bookForm="ngForm" class="book-form">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" id="title" name="title" [(ngModel)]="book.title" required minlength="3" #title="ngModel" [placeholder]="book.title" >
+      <input type="text" id="title" name="title" [(ngModel)]="bookToEdit.title" required minlength="3" #title="ngModel">
       <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error">
         <div *ngIf="title.errors?.['required']">Title is required.</div>
         <div *ngIf="title.errors?.['minlength']">Title must be at least 3 characters long.</div>
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
       <label for="author">Author</label>
-      <input type="text" id="author" name="author" [(ngModel)]="book.author" required minlength="3" #author="ngModel">
+      <input type="text" id="author" name="author" [(ngModel)]="bookToEdit.author" required minlength="3" #author="ngModel">
       <div *ngIf="author.invalid && (author.dirty || author.touched)" class="error">
         <div *ngIf="author.errors?.['required']">Author is required.</div>
         <div *ngIf="author.errors?.['minlength']">Author must be at least 3 characters long.</div>
@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
       <label for="genre">Genre</label>
-      <select id="genre" name="genre" [(ngModel)]="book.bookGenre" required #genre="ngModel">
+      <select id="genre" name="genre" [(ngModel)]="bookToEdit.bookGenre" required #genre="ngModel">
         <option *ngFor="let genre of genres" [value]="genre">{{ genre }}</option>
       </select>
       <div *ngIf="genre.invalid && (genre.dirty || genre.touched)" class="error">
@@ -27,14 +27,14 @@
     </div>
     <div class="form-group">
       <label for="releaseYear">Release Year</label>
-      <input type="date" id="releaseYear" name="releaseYear" [(ngModel)]="book.realeseYear" required #releaseYear="ngModel">
+      <input type="date" id="releaseYear" name="releaseYear" [(ngModel)]="bookToEdit.realeseYear" required #releaseYear="ngModel">
       <div *ngIf="releaseYear.invalid && (releaseYear.dirty || releaseYear.touched)" class="error">
-        <div *ngIf="releaseYear.errors?.['required']" >Release Year is required.</div>
+        <div *ngIf="releaseYear.errors?.['required']">Release Year is required.</div>
       </div>
     </div>
     <div class="button-group">
-    <button type="submit" class="btn update-btn" [disabled]="!bookForm.form.valid">Uppdatera bok</button>
-    <button (click)="goBack()" class="btn back-btn">Gå tillbaka</button>
-  </div>
+      <button type="submit" class="btn update-btn" [disabled]="!bookForm.form.valid">Uppdatera bok</button>
+      <button (click)="goBack()" class="btn back-btn">Gå tillbaka</button>
+    </div>
   </form>
 </div>
